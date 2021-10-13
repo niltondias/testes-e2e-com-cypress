@@ -4,7 +4,8 @@
   "description": "TBD.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test2": "echo \"Error: no test specified\" && exit 1",
+    "test": "cypress run",
     "lint": "eslint cypress/**/*.js",
     "lint:fix": "eslint cypress/**/*.js --fix",
     "cypress:open": "cypress open"

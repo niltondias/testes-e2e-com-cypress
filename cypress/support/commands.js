@@ -33,3 +33,24 @@ Cypress.Commands.add('fillSignupFormAndSubmit', (email, password) => {
     cy.contains('button', 'Signup').click()
     cy.get('#confirmationCode').should('be.visible')
 })
+
+Cypress.Commands.add('login', (
+    username = Cypress.env('USER_EMAIL'),
+    password = Cypress.env('USER_PASSWORD'),
+    { cacheSession = true } = {}
+) => {
+    const login = () => {
+        cy.visit('/login')
+        cy.get('#email').type(Cypress.env('USER_EMAIL'), { log: false })
+        cy.get('#password').type(Cypress.env('USER_PASSWORD'), { log: false })
+        cy.contains('button', 'Login').click()
+        cy.contains('h1', 'Your Notes').should('be.visible')
+    }
+
+    if (cacheSession) {
+        cy.session([username, password], login)
+    } else {
+        login()
+    }
+
+})
